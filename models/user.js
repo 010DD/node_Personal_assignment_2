@@ -17,7 +17,9 @@ module.exports = (sequelize, DataTypes) => {
 				primaryKey: true,
 				type: DataTypes.INTEGER
 			},
-			name: {
+			nick_name: {
+				unique: true,
+				allowNull: false,
 				type: DataTypes.STRING
 			},
 			email: {
@@ -32,9 +34,6 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 				type: DataTypes.STRING
 			},
-			// birth: {
-			// 	type: DataTypes.STRING
-			// },
 			birth_year: {
 				type: DataTypes.INTEGER
 			},

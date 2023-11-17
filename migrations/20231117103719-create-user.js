@@ -9,7 +9,9 @@ module.exports = {
 				primaryKey: true,
 				type: Sequelize.INTEGER
 			},
-			name: {
+			nick_name: {
+				allowNull: false,
+				unique: true,
 				type: Sequelize.STRING
 			},
 			email: {
@@ -23,7 +25,13 @@ module.exports = {
 				allowNull: false,
 				type: Sequelize.STRING
 			},
-			birth: {
+			birth_year: {
+				type: Sequelize.INTEGER
+			},
+			birth_month: {
+				type: Sequelize.INTEGER
+			},
+			birth_day: {
 				type: Sequelize.INTEGER
 			},
 			address: {
