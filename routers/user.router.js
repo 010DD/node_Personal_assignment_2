@@ -1,16 +1,20 @@
+require('dotenv').config();
+
 const express = require('express');
 const bcrypt = require('bcrypt');
-const joi = require('joi');
-const { User, Product, sequelize } = require('../models');
+const jwt = require('jsonwebtoken');
+const { User } = require('../models/index.js');
 const registerValidation = require('../middleware/register.js');
+const { alreadyLogin } = require('../middleware/auth.js');
 const router = express.Router();
 
 // User.destroy({
-// 	where: { name: '삼다수' }
+// 	where: { nickName: '오란씨' }
 // });
 
-router.post('/register', registerValidation, async (req, res) => {
-	const { name, email, password, passwordRe, birth_year, birth_month, birth_day, address } = req.body;
+//회원가입 기능
+router.post('/register', alreadyLogin, registerValidation, async (req, res) => {
+	const { nick_name, email, password, passwordRe, birth_year, birth_month, birth_day, address } = req.body;
 
 	const sameEmail = await User.findOne({ where: { email: email } });
 	if (sameEmail) {
@@ -20,7 +24,7 @@ router.post('/register', registerValidation, async (req, res) => {
 	const hashPassword = bcrypt.hashSync(password, 10);
 
 	const newUser = await User.create({
-		name,
+		nick_name,
 		email,
 		password: hashPassword,
 		birth_year,
@@ -45,21 +49,32 @@ router.post('/register', registerValidation, async (req, res) => {
 	res.status(200).json({ message: '회원가입이 완료되었습니다.' });
 });
 
-router.post('/auth/login', async (req, res) => {
+//로그인 기능
+router.post('/auth/login', alreadyLogin, async (req, res) => {
 	const { email, password } = req.body;
-	// console.log(email, password);
 
-	//비밀번호 동일한지(데이터베이스 비번이랑 비교)
 	const sameEmailData = await User.findOne({ where: { email } });
-	console.log('000=>', sameEmailData);
 	if (!sameEmailData) {
 		return res.status(404).json({ message: '존재하지 않는 회원입니다.' });
 	}
-	const isSameUser = await bcrypt.compare(password, sameEmailData.password);
-	console.log(Boolean(isSameUser));
+
+	const isSameUser = bcrypt.compareSync(password, sameEmailData.password);
 	if (!isSameUser) {
 		return res.status(400).json({ message: '비빌번호가 일치하지 않습니다.' });
 	}
+
+	const jwtToken = jwt.sign(
+		{
+			id: sameEmailData.id,
+			nickName: sameEmailData.nickName
+		},
+		process.env.SECRET_KEY,
+		{
+			expiresIn: '12h'
+		}
+	);
+	console.log(jwtToken);
+	res.header.authorization = `Bearer ${jwtToken}`;
 });
 
 module.exports = router;

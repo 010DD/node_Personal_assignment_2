@@ -3,7 +3,7 @@ const Joi = require('joi');
 const registerValidation = async (req, res, next) => {
 	const body = req.body;
 	const schema = Joi.object({
-		name: Joi.string().min(2).max(30),
+		nick_name: Joi.string().min(2).max(30).required(),
 		email: Joi.string()
 			.email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
 			.required(),

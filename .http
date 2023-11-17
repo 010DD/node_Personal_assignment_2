@@ -2,54 +2,79 @@
 
 POST http://localhost:3008/api/product HTTP/1.1
 Content-Type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAwMjE3OTQyLCJleHAiOjE3MDAyNjExNDJ9.QVrcSA8nwlIDYqUCTqj9kopZDqJKaSicZNQVVdXXLTo
 
-{
-  "product_name": "나이키 후드집업",
-  "price": "20000",
-  "comment": "검정색 얇은 후드집업이에요. 숏기장이고, 간단하게 걸치기 좋아유",
-  "buy_date": "20220101"
+{ 
+  "product_name": "22구찌 후드집업",
+  "price": "2000000",
+  "comment": "검정 후드에요. 숏기장이고, 힙해요",
+  "buy_date": "20201204"
+}
+
+
+#
+
+### 상품 리스트 보여주기
+GET http://localhost:3008/api/products?sort=2hk?do=dd HTTP/1.1
+Content-Type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAwMjE3OTQyLCJleHAiOjE3MDAyNjExNDJ9.QVrcSA8nwlIDYqUCTqj9kopZDqJKaSicZNQVVdXXLTo
+
+
+
+
+#
+
+### 상품 상세 보여주기
+GET http://localhost:3008/api/product/detail HTTP/1.1
+Content-Type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAwMjE3OTQyLCJleHAiOjE3MDAyNjExNDJ9.QVrcSA8nwlIDYqUCTqj9kopZDqJKaSicZNQVVdXXLTo
+
+
+#
+
+### 상품 수정하기
+PATCH  http://localhost:3008/api/product/2 HTTP/1.1
+Content-Type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzAwMjMxNTAyLCJleHAiOjE3MDAyNzQ3MDJ9.cC38BAN7i3mHnN1DXIwmws4XB1M6WyUdaBpXt-IFNCw
+
+{ 
+  "product_name": "꾸이꾸이 후드집업",
+  "price": "200000",
+  "comment": "꾸이꾸이 후드에요. 숏기장이고, 힙해요",
+  "status": "SOLD_OUT"
 }
 
 
 
-###
+#
 
-GET http://localhost:3008/
-
-
-
-
-## 상품 리스트 보기
-
-
-## 상품 상세 보기
-
-
-## 상품 수정하기
+### 상품 삭제하기
+DELETE http://localhost:3008/api/product/2 HTTP/1.1
+Content-Type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAwMjMzODg1LCJleHAiOjE3MDAyNzcwODV9.DjekGOetomPvsqn6ghvqBCo8pDB4dZZ_LqA7yrUbDvI
 
 
 
 
 
-## 상품 삭제하기
 
-
-
+#
 
 ### 회원가입 
 POST http://localhost:3008/api/register HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "오란씨",
-  "email": "55pppiowd@naver.com",
+  "nick_name": "오동동",
+  "email": "QQQpiowd@naver.com",
   "password" : "123123",
   "passwordRe" : "123123",
-  "birth_year" : "1990",
+  "birth_year" : "1995",
   "birth_month" : "12",
   "birth_day" : "24",
-  "address": "전라북도 전주시 완산구 평화동"
+  "address": "경기도 부천시 원종동"
 }
+
 
 
 # 
@@ -60,10 +85,10 @@ POST http://localhost:3008/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "55pppiowd@naver.com",
-  "password" : "1231232"
-}
+  "email": "25d5pppiowd@naver.com",
+  "password" : "123123"
 
+}
 
 
 
