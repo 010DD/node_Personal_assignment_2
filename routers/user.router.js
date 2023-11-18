@@ -6,47 +6,45 @@ const jwt = require('jsonwebtoken');
 const { User } = require('../models/index.js');
 const registerValidation = require('../middleware/register.js');
 const { alreadyLogin } = require('../middleware/auth.js');
-const router = express.Router();
+const { EmailExistError, NickNameExistError } = require('../middleware/CustomError.js');
 
+const router = express.Router();
 // User.destroy({
 // 	where: { nickName: '오란씨' }
 // });
 
 //회원가입 기능
-router.post('/register', alreadyLogin, registerValidation, async (req, res) => {
-	const { nick_name, email, password, passwordRe, birth_year, birth_month, birth_day, address } = req.body;
+router.post('/register', alreadyLogin, registerValidation, async (req, res, next) => {
+	const { nick_name, email, password, birth_year, birth_month, birth_day, address } = req.body;
+	try {
+		//이미 존재하는 이메일, 닉네임인 경우
+		const sameEmail = await User.findOne({ where: { email } });
+		const sameNick_name = await User.findOne({ where: { nick_name } });
 
-	const sameEmail = await User.findOne({ where: { email: email } });
-	if (sameEmail) {
-		return res.status(409).json({ message: '이미 존재하는 이메일입니다.' });
+		if (sameEmail) {
+			throw new EmailExistError();
+		}
+		if (sameNick_name) {
+			throw new NickNameExistError();
+		}
+
+		const hashPassword = bcrypt.hashSync(password, 10);
+		console.log('해쉬패스워드=>', hashPassword);
+
+		const newUser = await User.create({
+			nick_name,
+			email,
+			password: hashPassword,
+			birth_year,
+			birth_month,
+			birth_day,
+			address
+		});
+
+		return res.status(200).json({ message: '회원가입이 완료되었습니다.', newUser });
+	} catch (err) {
+		next(err);
 	}
-
-	const hashPassword = bcrypt.hashSync(password, 10);
-
-	const newUser = await User.create({
-		nick_name,
-		email,
-		password: hashPassword,
-		birth_year,
-		birth_month,
-		birth_day,
-		address
-	});
-
-	// if (!email) {
-	// 	return res.status(400).json({ message: '이메일을 입력해주세요' });
-	// }
-	// if (password.length < 6) {
-	// 	return res.status(400).json({ message: '비밀번호는 6자리 이상이여야 합니다.' });
-	// }
-	// if (newUser.errorMessage) {
-	// 	throw new Error(newUser.errorMessage);
-	// }
-	// if (password !== passwordRe) {
-	// 	return res.status(400).json({ message: '비밀번호가 일치하지 않습니다.' });
-	// }
-
-	res.status(200).json({ message: '회원가입이 완료되었습니다.' });
 });
 
 //로그인 기능
@@ -55,7 +53,9 @@ router.post('/auth/login', alreadyLogin, async (req, res) => {
 
 	const sameEmailData = await User.findOne({ where: { email } });
 	if (!sameEmailData) {
-		return res.status(404).json({ message: '존재하지 않는 회원입니다.' });
+		const newError = new Error();
+		console.log('에러 테스트', newError);
+		// return res.status(404).json({ message: '존재하지 않는 회원입니다.' });
 	}
 
 	const isSameUser = bcrypt.compareSync(password, sameEmailData.password);
