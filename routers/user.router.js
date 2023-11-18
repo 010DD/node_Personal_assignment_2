@@ -4,9 +4,14 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models/index.js');
-const registerValidation = require('../middleware/register.js');
+const { registerValidation, loginValidation } = require('../middleware/register.js');
 const { alreadyLogin } = require('../middleware/auth.js');
-const { EmailExistError, NickNameExistError } = require('../middleware/CustomError.js');
+const {
+	EmailExistError,
+	NickNameExistError,
+	UserDosntExistError,
+	PasswordIncorrectError
+} = require('../middleware/CustomError.js');
 
 const router = express.Router();
 // User.destroy({
@@ -29,8 +34,6 @@ router.post('/register', alreadyLogin, registerValidation, async (req, res, next
 		}
 
 		const hashPassword = bcrypt.hashSync(password, 10);
-		console.log('해쉬패스워드=>', hashPassword);
-
 		const newUser = await User.create({
 			nick_name,
 			email,
@@ -48,33 +51,40 @@ router.post('/register', alreadyLogin, registerValidation, async (req, res, next
 });
 
 //로그인 기능
-router.post('/auth/login', alreadyLogin, async (req, res) => {
+router.post('/auth/login', alreadyLogin, loginValidation, async (req, res, next) => {
 	const { email, password } = req.body;
-
-	const sameEmailData = await User.findOne({ where: { email } });
-	if (!sameEmailData) {
-		const newError = new Error();
-		console.log('에러 테스트', newError);
-		// return res.status(404).json({ message: '존재하지 않는 회원입니다.' });
-	}
-
-	const isSameUser = bcrypt.compareSync(password, sameEmailData.password);
-	if (!isSameUser) {
-		return res.status(400).json({ message: '비빌번호가 일치하지 않습니다.' });
-	}
-
-	const jwtToken = jwt.sign(
-		{
-			id: sameEmailData.id,
-			nickName: sameEmailData.nickName
-		},
-		process.env.SECRET_KEY,
-		{
-			expiresIn: '12h'
+	console.log('password=>', password);
+	try {
+		//회원이 존재 하는가.
+		const sameEmailData = await User.findOne({ where: { email } });
+		console.log(sameEmailData);
+		if (!sameEmailData) {
+			throw new UserDosntExistError();
 		}
-	);
-	console.log(jwtToken);
-	res.header.authorization = `Bearer ${jwtToken}`;
+
+		//비밀번호가 동일한가.
+		const isSameUser = bcrypt.compareSync(password, sameEmailData.password);
+		console.log('isSameUser=>', isSameUser);
+		if (!isSameUser) {
+			throw new PasswordIncorrectError();
+		}
+
+		const jwtToken = jwt.sign(
+			{
+				id: sameEmailData.id,
+				nickName: sameEmailData.nickName
+			},
+			process.env.SECRET_KEY,
+			{ expiresIn: '12h' }
+		);
+		console.log(jwtToken);
+		res.header.authorization = `Bearer ${jwtToken}`;
+	} catch (err) {
+		// res.send(err);
+		next(err);
+	}
+	res.status(200).json({ success: true, message: '로그인 되었습니다.' });
+	next();
 });
 
 module.exports = router;

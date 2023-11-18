@@ -9,6 +9,13 @@ const ErrorHandler = (err, req, res, next) => {
 		return res.status(400).json({ success: false, erroerMessage: '이미 존재하는 닉네임 입니다.' });
 	}
 
+	if (err.name === 'UserDosntExistError') {
+		return res.status(404).json({ success: false, erroerMessage: '존재하지 않는 회원입니다.' });
+	}
+	if (err.name === 'PasswordIncorrectError') {
+		return res.status(400).json({ success: false, erroerMessage: '비빌번호가 일치하지 않습니다.' });
+	}
+
 	const errPath = err.details[0].path[0];
 	const errType = err.details[0].type;
 
@@ -33,6 +40,7 @@ const ErrorHandler = (err, req, res, next) => {
 			}
 		}
 	}
+
 	// res.status(500).json({ success: false, erroerMessage: '서버 오류' });
 };
 
