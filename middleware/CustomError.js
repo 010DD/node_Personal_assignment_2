@@ -1,24 +1,3 @@
-class WriteEmailError extends Error {
-	constructor(message) {
-		super(message);
-		this.name = 'WriteEmailError';
-	}
-}
-
-class PasswordLengthError extends Error {
-	constructor(message) {
-		super(message);
-		this.name = 'PasswordLengthError';
-	}
-}
-
-class PasswordReError extends Error {
-	constructor(message) {
-		super(message);
-		this.name = 'PasswordReError';
-	}
-}
-
 class EmailExistError extends Error {
 	constructor(message) {
 		super(message);
@@ -33,26 +12,23 @@ class NickNameExistError extends Error {
 	}
 }
 
-class WriteNickNameError extends Error {
+class UserDosntExistError extends Error {
 	constructor(message) {
 		super(message);
-		this.name = 'WriteNickNameError';
+		this.name = 'UserDosntExistError';
 	}
 }
 
-class WritePasswordError extends Error {
+class PasswordIncorrectError extends Error {
 	constructor(message) {
 		super(message);
-		this.name = 'WritePasswordError';
+		this.name = 'PasswordIncorrectError';
 	}
 }
 
 module.exports = {
-	WriteEmailError,
-	PasswordLengthError,
-	PasswordReError,
 	EmailExistError,
 	NickNameExistError,
-	WriteNickNameError,
-	WritePasswordError
+	UserDosntExistError,
+	PasswordIncorrectError
 };

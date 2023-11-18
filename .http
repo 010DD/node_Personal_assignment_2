@@ -63,6 +63,7 @@ authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxN
 ### 회원가입 
 POST http://localhost:3008/api/register HTTP/1.1
 Content-Type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAwMzIwODAwLCJleHAiOjE3MDAzNjQwMDB9.Xb-3RsVmukmhHqGu791Tqzzd8N2r0cWb9hntaqcFIBU
 
 {
   "nick_name" : "이아",
@@ -76,24 +77,15 @@ Content-Type: application/json
 }
 
 
-
-
-
 # 
-
-
 
 ### 회원 로그인
 POST http://localhost:3008/api/auth/login HTTP/1.1
 Content-Type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAwMzIwODAwLCJleHAiOjE3MDAzNjQwMDB9.Xb-3RsVmukmhHqGu791Tqzzd8N2r0cWb9hntaqcFIBU
 
 {
-  "email": "25d5pppiowd@naver.com",
+  "email": "piowd@naver.com",
   "password" : "123123"
-
 }
-
-
-
-
 
