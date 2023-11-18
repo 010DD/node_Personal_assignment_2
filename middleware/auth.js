@@ -5,7 +5,7 @@ const { User } = require('../models');
 //인증된 사용자인지 검증합니다.
 async function authMiddleware(req, res, next) {
 	const [tokenType, tokenValue] = req.headers.authorization.split(' ');
-	console.log(tokenType);
+	// console.log(tokenType);
 	if (tokenType !== 'Bearer' || !tokenValue) {
 		return res.status(400).json({ message: '토큰이 없습니다.' });
 	}
