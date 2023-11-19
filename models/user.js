@@ -34,13 +34,16 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 				type: DataTypes.STRING
 			},
-			birth_year: {
-				type: DataTypes.INTEGER
-			},
-			birth_month: {
-				type: DataTypes.INTEGER
-			},
-			birth_day: {
+			// birth_year: {
+			// 	type: DataTypes.INTEGER
+			// },
+			// birth_month: {
+			// 	type: DataTypes.INTEGER
+			// },
+			// birth_day: {
+			// 	type: DataTypes.INTEGER
+			// },
+			birth_date: {
 				type: DataTypes.INTEGER
 			},
 			address: {
