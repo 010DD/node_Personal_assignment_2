@@ -26,9 +26,49 @@ class PasswordIncorrectError extends Error {
 	}
 }
 
+class UriIncorrectError extends Error {
+	constructor(message) {
+		super(message);
+		this.name = 'UriIncorrectError';
+	}
+}
+
+class InvalidTokenError extends Error {
+	constructor(message) {
+		super(message);
+		this.name = 'InvalidTokenError';
+	}
+}
+
+class AlreadyLoginError extends Error {
+	constructor(message) {
+		super(message);
+		this.name = 'AlreadyLoginError';
+	}
+}
+
+class ProductDosntExistError extends Error {
+	constructor(message) {
+		super(message);
+		this.name = 'ProductDosntExistError';
+	}
+}
+
+class NoPermissionError extends Error {
+	constructor(message) {
+		super(message);
+		this.name = 'NoPermissionError';
+	}
+}
+
 module.exports = {
 	EmailExistError,
 	NickNameExistError,
 	UserDosntExistError,
-	PasswordIncorrectError
+	PasswordIncorrectError,
+	UriIncorrectError,
+	InvalidTokenError,
+	AlreadyLoginError,
+	ProductDosntExistError,
+	NoPermissionError
 };
