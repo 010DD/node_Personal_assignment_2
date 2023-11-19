@@ -20,10 +20,10 @@ const registerValidation = async (req, res, next) => {
 		passwordRe: Joi.any().valid(Joi.ref('password')).required().messages({
 			'any.only': '비밀번호가 일치하지 않습니다.'
 		}),
-		birth_year: Joi.number().min(1900).max(2022),
-		birth_month: Joi.number().min(1).max(12),
-		birth_day: Joi.number().min(1).max(31),
-		address: Joi.string()
+		birth_date: Joi.date().allow('').iso().min('1-1-1920').max('1-1-2021').messages({
+			'date.format': '1920 ~ 2020 출생자만 입력이 가능합니다. (년-월-일 형식).'
+		}),
+		address: Joi.string().allow('')
 	});
 	try {
 		await schema.validateAsync(req.body);
@@ -76,7 +76,9 @@ const newProductValidation = async (req, res, next) => {
 		comment: Joi.string().required().messages({
 			'string.empty': '내용을 입력해 주세요,'
 		}),
-		buy_date: Joi.date(),
+		buy_date: Joi.date().allow('').iso().max('now').messages({
+			'date.format': '입력하신 날짜를 확인해 주세요. (년-월-일 형식).'
+		}),
 		status: Joi.string()
 	});
 	try {

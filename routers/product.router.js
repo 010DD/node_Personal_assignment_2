@@ -5,8 +5,8 @@ const { newProductValidation } = require('../middleware/JoiValidation.js');
 const { UriIncorrectError, ProductDosntExistError, NoPermissionError } = require('../middleware/CustomError.js');
 const router = express.Router();
 
-// Product.destroy({
-// 	where: { user_id: 1 }
+// User.destroy({
+// 	where: { id: 1 }
 // });
 
 //상품 작성하기

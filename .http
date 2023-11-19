@@ -2,14 +2,12 @@
 
 POST http://localhost:3008/api/product HTTP/1.1
 Content-Type: application/json
-# authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAwMzcwNDI5LCJleHAiOjE3MDAzNzA0NDF9.0cPKRjIl5JcdD9Tcjm8vFpVijCvtNOIa6yd9iB9umdM
-authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAwMzcwODQzLCJleHAiOjE3MDA0MTQwNDN9.BZVUfZF7wsvpBuMY2_JtoHNeLxJqByeaFqIzJoyUiFI
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImlhdCI6MTcwMDM4MzUzOCwiZXhwIjoxNzAwNDI2NzM4fQ.3T4wksTcffR9f_TbC_nN0puGIhxZdjd-AGdOPjsSv2M
 
 { 
-  "product_name": "꾸이칩",
+  "product_name": "꾸ㅂㅂ이ㅈ칩",
   "price": "3000",
-  "comment": "ddd",
-  "buy_date": "20230704"
+  "comment": "ddd"
 }
 
 
@@ -60,9 +58,9 @@ authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxN
 #
 
 ### 상품 삭제하기
-DELETE http://localhost:3008/api/product/20 HTTP/1.1
+DELETE http://localhost:3008/api/product/5 HTTP/1.1
 Content-Type: application/json
-authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNzAwMzc4MDUyLCJleHAiOjE3MDA0MjEyNTJ9.yYPQjNY_HVNnlG1fc1_XeVT71XyB5i3XeZA6qCoLedo
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAwMzgwMjA1LCJleHAiOjE3MDA0MjM0MDV9.JloJDAto72hgAY7wS1fUi1sPJJGg4v9w6SwxlqoQA9Y
 
 
 
@@ -79,14 +77,12 @@ Content-Type: application/json
 # authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAwMzIwODAwLCJleHAiOjE3MDAzNjQwMDB9.Xb-3RsVmukmhHqGu791Tqzzd8N2r0cWb9hntaqcFIBU
 
 {
-  "nick_name" : "방어회",
-  "email": "allrktk@l1aver.com",
+  "nick_name" : "방어w22wss회",
+  "email": "allrktkwww22w@l1aver.com",
   "password" : "123123",
   "passwordRe" : "123123",
-  "birth_year" : "1995",
-  "birth_month" : "12",
-  "birth_day" : "24",
-  "address": "경기도 부천시 원종동"
+  "birth_date" : "1995-06-24",
+  "address": "dd"
 }
 
 
@@ -99,7 +95,7 @@ POST http://localhost:3008/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "alrkgi@naver.com",
+  "email": "allrktkwww22w@l1aver.com",
   "password" : "123123"
 }
 

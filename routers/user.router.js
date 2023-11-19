@@ -17,7 +17,7 @@ const router = express.Router();
 
 //회원가입 기능
 router.post('/register', alreadyLogin, registerValidation, async (req, res, next) => {
-	const { nick_name, email, password, birth_year, birth_month, birth_day, address } = req.body;
+	const { nick_name, email, password, birth_date, address } = req.body;
 	try {
 		//이미 존재하는 이메일, 닉네임인 경우
 		const sameEmail = await User.findOne({ where: { email } });
@@ -35,9 +35,7 @@ router.post('/register', alreadyLogin, registerValidation, async (req, res, next
 			nick_name,
 			email,
 			password: hashPassword,
-			birth_year,
-			birth_month,
-			birth_day,
+			birth_date,
 			address
 		});
 
