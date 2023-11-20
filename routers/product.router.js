@@ -63,26 +63,24 @@ router.get('/products', authMiddleware, async (req, res, next) => {
 });
 
 //상품 상세 보여주기
-router.get('/product/detail', authMiddleware, async (req, res, next) => {
+router.get('/product/detail/:id', authMiddleware, async (req, res, next) => {
 	try {
-		const productJoinUser = await Product.findAll({
+		const productJoinUser = await Product.findOne({
+			where: { id: req.params.id },
 			include: {
 				model: User
 			}
 		});
-
-		const showList = productJoinUser.map((data) => {
-			return {
-				id: data.id,
-				nick_name: data.User.nick_name,
-				product_name: data.product_name,
-				comment: data.comment,
-				status: data.status,
-				price: data.price,
-				createdAt: data.createdAt,
-				updatedAt: data.updatedAt
-			};
-		});
+		const showList = {
+			id: productJoinUser.id,
+			nick_name: productJoinUser.User.nick_name,
+			product_name: productJoinUser.product_name,
+			comment: productJoinUser.comment,
+			status: productJoinUser.status,
+			price: productJoinUser.price,
+			createdAt: productJoinUser.createdAt,
+			updatedAt: productJoinUser.updatedAt
+		};
 
 		return res.status(200).json({ success: true, message: '상품 리스트 조회 성공하였습니다.', showList });
 	} catch (err) {
