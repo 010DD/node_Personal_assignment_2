@@ -2,11 +2,11 @@ const ErrorHandler = (err, req, res, next) => {
 	console.log('에러헨들러 미들웨어 구동중', err);
 
 	if (err.name === 'EmailExistError') {
-		return res.status(401).json({ success: false, erroerMessage: '이미 존재하는 이메일 입니다.' });
+		return res.status(409).json({ success: false, erroerMessage: '이미 존재하는 이메일 입니다.' });
 	}
 
 	if (err.name === 'NickNameExistError') {
-		return res.status(401).json({ success: false, erroerMessage: '이미 존재하는 닉네임 입니다.' });
+		return res.status(409).json({ success: false, erroerMessage: '이미 존재하는 닉네임 입니다.' });
 	}
 
 	if (err.name === 'UserDosntExistError') {
