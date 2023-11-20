@@ -39,7 +39,13 @@ router.post('/register', alreadyLogin, registerValidation, async (req, res, next
 			address
 		});
 
-		return res.status(201).json({ success: true, message: '회원가입이 완료되었습니다.', newUser });
+		const showUser = {
+			nick_name: newUser.nick_name,
+			email: newUser.email,
+			birth_date: newUser.birth_date,
+			address: newUser.address
+		};
+		return res.status(201).json({ success: true, message: '회원가입이 완료되었습니다.', showUser });
 	} catch (err) {
 		next(err);
 	}
