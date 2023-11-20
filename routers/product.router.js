@@ -16,7 +16,7 @@ router.post('/product', authMiddleware, newProductValidation, async (req, res, n
 
 	try {
 		const newProduct = await Product.create({ user_id, product_name, price, comment, buy_date });
-		return res.status(200).json({ success: true, message: '상품 업로드 완료하였습니다.', newProduct });
+		return res.status(201).json({ success: true, message: '상품 업로드 완료하였습니다.', newProduct });
 	} catch (err) {
 		next(err);
 	}
