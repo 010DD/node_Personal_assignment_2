@@ -71,6 +71,9 @@ router.get('/product/detail/:id', authMiddleware, async (req, res, next) => {
 				model: User
 			}
 		});
+		if (!productJoinUser) {
+			throw new ProductDosntExistError();
+		}
 		const showList = {
 			id: productJoinUser.id,
 			nick_name: productJoinUser.User.nick_name,
