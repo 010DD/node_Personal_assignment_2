@@ -27,7 +27,7 @@ authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImlhdCI6M
 #
 
 ### 상품 상세 보여주기
-GET http://localhost:3008/api/product/detail/23 HTTP/1.1
+GET http://localhost:3008/api/product/detail/1 HTTP/1.1
 Content-Type: application/json
 authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImlhdCI6MTcwMDQ1MjUwMiwiZXhwIjoxNzAwNDk1NzAyfQ.5uSAXFyA8NoxjoJjiJ_JjkhYdDRzTQ8vgWaZedOtTas
 
