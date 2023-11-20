@@ -77,8 +77,8 @@ Content-Type: application/json
 # authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzAwMzIwODAwLCJleHAiOjE3MDAzNjQwMDB9.Xb-3RsVmukmhHqGu791Tqzzd8N2r0cWb9hntaqcFIBU
 
 {
-  "nick_name" : "방어w22wss회",
-  "email": "allrktkwww22w@l1aver.com",
+  "nick_name" : "방1어w22wss회",
+  "email": "a2llrktkwww22w@l1aver.com",
   "password" : "123123",
   "passwordRe" : "123123",
   "birth_date" : "1995-06-24",
