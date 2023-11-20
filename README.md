@@ -104,10 +104,10 @@ http://mallish.store/api/
   > 개발용(`--save-dev, -D`)은 실제 배포에는 필요가 없으나, 개발할때에는 필요한 라이브러리를 설치하는 경우에 사용합니다.<br/>
   > 예를들어 sequelize-cli나 nodemon 같은 경우가 그렇습니다.<br/>
 
-  글로벌(`--global, -g`)은 해당 라이브러리를 전역으로 설치하고 싶은 경우 사용합니다.<br/>
-  시스템의 node_modules에 설치되며, 프로젝트에서는 사용할 수 있지만, package.json 파일에는 표기되지 않습니다.<br/>
+  > 글로벌(`--global, -g`)은 해당 라이브러리를 전역으로 설치하고 싶은 경우 사용합니다.<br/>
+  > 시스템의 node_modules에 설치되며, 프로젝트에서는 사용할 수 있지만, package.json 파일에는 표기되지 않습니다.<br/>
 
-  일반으로 설치하게 되면 package.json 파일의 dependencies 에 해당 라이브러리 이름이 추가됩니다.<br/>
-  배포시 사용할 라이브러리들은 모두 dependencies에 담아둡니다.<br/>
+  > 일반으로 설치하게 되면 package.json 파일의 dependencies 에 해당 라이브러리 이름이 추가됩니다.<br/>
+  > 배포시 사용할 라이브러리들은 모두 dependencies에 담아둡니다.<br/>
 
-  nodemon의 경우 배포에는 필요가 없으니 개발용으로 -D 옵션을 이용하면 됩니다.<br/>
+  > nodemon의 경우 배포에는 필요가 없으니 개발용으로 -D 옵션을 이용하면 됩니다.<br/>
